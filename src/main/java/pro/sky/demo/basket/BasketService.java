@@ -1,7 +1,10 @@
 package pro.sky.demo.basket;
 
-import java.util.Set;
+import java.util.List;
 
 public interface BasketService {
-    void add(Set<Integer> ids);
+
+    String hello();
+    void add(List<Integer> ids);
+    List<Item> get();
 }

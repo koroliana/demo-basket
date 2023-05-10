@@ -1,14 +1,11 @@
 package pro.sky.demo.basket;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
+import java.util.List;
 
 @RestController
-@RequestMapping("/store/order")
+@RequestMapping("/order")
 public class BasketController {
 
     private final BasketService basketService;
@@ -17,9 +14,24 @@ public class BasketController {
         this.basketService = basketService;
     }
 
-    @GetMapping("/add")
-    public void add(@RequestParam("id") Set<Integer> ids) {
+    @GetMapping
+    public String hello() {
+        return basketService.hello();
+    }
+
+    @GetMapping(path = "/add")
+    public void add(@RequestParam("id") List<Integer> ids) {
         basketService.add(ids);
+    }
+
+    @GetMapping(path = "/get")
+    public List<Item> get() {
+        return basketService.get();
+    }
+
+    @ExceptionHandler(Exception.class)
+    public String ExceptionHandler(Exception e) {
+        return e.getMessage();
     }
 
 
